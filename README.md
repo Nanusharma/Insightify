@@ -1,4 +1,4 @@
-# AI Note-Taking Web Application: Insightify [ Insightify_Report.pdf contains the detailed report ]
+# AI Note-Taking Web Application: Insightify   [ Insightify_Report.pdf contains the detailed report ]
 
 ## Project Overview
 
