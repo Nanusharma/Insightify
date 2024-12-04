@@ -1,27 +1,72 @@
-# Digit Recognizer Web App ![Python](https://img.shields.io/badge/Python-3.x-blue.svg) ![Flask](https://img.shields.io/badge/Flask-1.1.2-green.svg) ![MNIST](https://img.shields.io/badge/MNIST-Data-yellow)
+# AI Note-Taking Web Application: Insightify
 
-This project is a digit recognition tool using the MNIST dataset. Users can draw a digit (0-9) on a canvas, and the app predicts the digit based on the pixel data.
+## Project Overview
 
-## 🎨 Features
+This web application revolutionizes note-taking by leveraging artificial intelligence to convert multiple input methods into structured, readable notes. Users can create notes through handwriting, image uploads, and audio recordings.
 
-- 🖌️ **Interactive drawing canvas** (280x280 pixels)
-- 🔍 **Real-time prediction** using a pre-trained machine learning model
-- 🖥️ Predictions displayed on the interface
+## Key Features
 
-## 🚀 Use Cases
+- Multiple input methods:
+  - Handwritten notes
+  - Image uploads
+  - Audio recordings
+- AI-powered note generation using Google's Gemini API
+- PDF export functionality
+- User-friendly web interface
 
-- Optical Character Recognition (OCR)
-- Handwriting digit recognition in assistive technology
-- Educational tools for learning AI and image recognition
+## Technologies Used
 
-## 🛠 Technologies
-
-- **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Flask (Python)
-- **Model**: Pre-trained model using MNIST dataset
+- **Frontend**: HTML, CSS, JavaScript
+- **AI Integration**: Google Gemini API
+- **PDF Generation**: FPDF
 
-## 🏗 Setup
+## Prerequisites
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Nanusharma/digit-recognizer-webapp.git
+- Python 3.8+
+- Flask
+- Google Gemini API credentials
+- FPDF library
+- Modern web browser
+
+## Installation
+
+1. Clone the repository
+```bash
+git clone [https://github.com/yourusername/ai-note-taking-app.git](https://github.com/Nanusharma/Insightify.git)
+```
+2. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+3. Set up Google Gemini API credentials
+   - Obtain API key from Google Cloud Console
+   - Set environment variable or update configuration file
+
+## Running the Application
+
+```bash
+flask run
+```
+
+## Usage
+
+1. Navigate to homepage
+2. Choose input method:
+   - Write notes manually
+   - Upload an image
+   - Record audio
+3. Generate and download PDF
+
+## Project Limitations
+
+- Primary language support: English
+- Web-based platform compatibility
+- Basic note organization features
+
+## Future Enhancements
+
+- Multi-language support
+- Advanced note organization
+- Enhanced AI processing capabilities
