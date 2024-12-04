@@ -5,9 +5,9 @@
 This web application revolutionizes note-taking by leveraging artificial intelligence to convert multiple input methods into structured, readable notes. Users can create notes through handwriting, image uploads, and audio recordings.
 
 
-![image](https://github.com/user-attachments/assets/986dd16f-9038-4f54-bc63-d4b5141c4650)
-![image](https://github.com/user-attachments/assets/f57bd72e-b444-48d8-b056-118158fbd202)
-![image](https://github.com/user-attachments/assets/50a477f3-17b8-4efe-b10a-7817b7c14393)
+![image](https://github.com/user-attachments/assets/31f7603f-0241-4b58-9ea2-be7d90f417e9)
+![image](https://github.com/user-attachments/assets/aaa304b5-000a-4811-9048-302058406185)
+![image](https://github.com/user-attachments/assets/eedc077c-8f0a-4d8e-8100-d719a1f5b768)
 
 
 ## Key Features
