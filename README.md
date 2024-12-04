@@ -33,22 +33,14 @@ This web application revolutionizes note-taking by leveraging artificial intelli
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/ai-note-taking-app.git
-cd ai-note-taking-app
+git clone [https://github.com/yourusername/ai-note-taking-app.git](https://github.com/Nanusharma/Insightify.git)
 ```
-
-2. Create a virtual environment
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-```
-
-3. Install dependencies
+2. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Set up Google Gemini API credentials
+3. Set up Google Gemini API credentials
    - Obtain API key from Google Cloud Console
    - Set environment variable or update configuration file
 
@@ -78,11 +70,3 @@ flask run
 - Multi-language support
 - Advanced note organization
 - Enhanced AI processing capabilities
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch
-3. Commit changes
-4. Push to the branch
-5. Create a pull request
