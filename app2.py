@@ -10,12 +10,12 @@ import io
 app = Flask(__name__)
 
 # Set up configuration
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'static'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Configure Gemini API
-genai.configure(api_key="")
+genai.configure(api_key="AIzaSyDBnz6Jti_6YAebBZHM2uaBGXXf_rSWPeQ")
 generation_config = {
     "temperature": 1,
     "top_p": 0.95,

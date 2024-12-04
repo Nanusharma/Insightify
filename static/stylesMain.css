@@ -38,7 +38,7 @@ body {
 }
 
 body::before {
-    content: "DEXTER";
+    content: "Insightify";
     font-size: 8rem;
     font-weight: 100;
     font-style: normal;

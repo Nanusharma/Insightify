@@ -1,0 +1,61 @@
+```mermaid
+flowchart TD
+    subgraph Client
+        A[User Interface] --> B1[/Access Routes/]
+    end
+
+    subgraph Routes
+        B1 --> C1[Home Route '/']
+        B1 --> C2[Write Route '/write']
+        B1 --> C3[Upload Image Route '/upload-image']
+        B1 --> C4[Audio Route '/audio']
+        B1 --> C5[Upload Route '/upload' POST]
+    end
+
+    subgraph Templates
+        C1 --> D1[main.html]
+        C2 --> D2[indexCanvas.html]
+        C3 --> D3[indexUpload.html]
+        C4 --> D4[indexAudio.html]
+    end
+
+    subgraph Upload_Processing
+        C5 --> E1{File Type Check}
+        E1 -->|Audio| F1[Save Temporary Audio]
+        E1 -->|Image| F2[Save Temporary Image]
+        
+        F1 --> G1[Process with Gemini]
+        F2 --> G1
+        
+        G1 --> H1[Generate Text Response]
+        H1 --> I1[Convert to PDF]
+        
+        I1 --> J1[Save PDF]
+        J1 --> K1[Return JSON Response]
+        
+        F1 --> L1[Delete Temporary File]
+        F2 --> L1
+    end
+
+    subgraph Gemini_API
+        G1 --> M1[Configure API]
+        M1 --> M2[Upload File]
+        M2 --> M3[Generate Content]
+        M3 --> H1
+    end
+
+    subgraph PDF_Generation
+        I1 --> N1[Create FPDF Instance]
+        N1 --> N2[Add Page]
+        N2 --> N3[Set Font]
+        N3 --> N4[Add Text]
+        N4 --> N5[Save PDF]
+    end
+
+    style Client fill:#f9f,stroke:#333,stroke-width:2px
+    style Routes fill:#bbf,stroke:#333,stroke-width:2px
+    style Templates fill:#bfb,stroke:#333,stroke-width:2px
+    style Upload_Processing fill:#ffb,stroke:#333,stroke-width:2px
+    style Gemini_API fill:#fbf,stroke:#333,stroke-width:2px
+    style PDF_Generation fill:#bff,stroke:#333,stroke-width:2px
+```
