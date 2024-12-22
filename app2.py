@@ -6,6 +6,11 @@ from fpdf import FPDF
 import tempfile
 from PIL import Image
 import io
+from bs4 import BeautifulSoup
+import requests
+from urllib.parse import urlparse
+
+
 
 app = Flask(__name__)
 
@@ -15,7 +20,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Configure Gemini API
-genai.configure(api_key="AIzaSyBAHfyzLXprFGozeRE9wyPiG4bZbL44SFU")
+genai.configure(api_key="AIzaSyCzst48MNGT3IJBW29xSuPjBEIHy7MiPEQ")
 generation_config = {
     "temperature": 1,
     "top_p": 0.95,
@@ -43,6 +48,99 @@ def upload_image():
 @app.route('/audio')
 def audio():
     return render_template('indexAudio.html')
+
+@app.route('/site')
+def site():
+    return render_template('indexSite.html')
+
+
+@app.route('/analyze-website', methods=['POST'])
+def analyze_website():
+    try:
+        url = request.json.get('url')
+        if not url:
+            return jsonify({'error': 'URL is required'}), 400
+
+        # Validate URL
+        try:
+            result = urlparse(url)
+            if not all([result.scheme, result.netloc]):
+                return jsonify({'error': 'Invalid URL'}), 400
+        except ValueError:
+            return jsonify({'error': 'Invalid URL'}), 400
+
+        # Extract website content
+        content = extract_website_content(url)
+        if not content:
+            return jsonify({'error': 'Could not extract website content'}), 400
+
+        # Generate summary using Gemini
+        prompt = f"Provide a concise 3-sentence summary of the following website content: {content}"
+        response = model.generate_content(prompt)
+        
+        return jsonify({
+            'success': True,
+            'summary': response.text
+        })
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/chat-message', methods=['POST'])
+def chat_message():
+    try:
+        message = request.json.get('message')
+        url = request.json.get('url')
+        
+        if not message or not url:
+            return jsonify({'error': 'Message and URL are required'}), 400
+
+        # Extract website content
+        content = extract_website_content(url)
+        if not content:
+            return jsonify({'error': 'Could not extract website content'}), 400
+
+        # Generate response using Gemini
+        prompt = f"""
+        Website Content: {content}
+        
+        User Question: {message}
+        
+        Please provide a relevant and informative response based on the website content.
+        """
+        
+        response = model.generate_content(prompt)
+        
+        return jsonify({
+            'success': True,
+            'response': response.text
+        })
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+def extract_website_content(url, max_chars=5000):
+    try:
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()
+
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        # Remove scripts, styles, and navigation elements
+        for script in soup(["script", "style", "nav", "header", "footer"]):
+            script.decompose()
+        
+        content = soup.get_text(separator=' ', strip=True)
+        return content[:max_chars]
+
+    except Exception as e:
+        print(f"Error extracting website content: {e}")
+        return None
+    
+
 
 @app.route('/upload', methods=['POST'])
 def upload():

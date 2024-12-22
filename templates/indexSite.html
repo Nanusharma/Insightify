@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Content Analyzer & Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesSite.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Website Content Analyzer & Chatbot</h1>
+            <p>Enter a website URL and chat about its content with AI</p>
+        </div>
+
+        <div class="card">
+            <div class="input-group">
+                <label class="label" for="url">Website URL</label>
+                <input type="url" id="url" class="input" placeholder="https://example.com">
+                <button id="analyze" class="button">Analyze Website</button>
+            </div>
+
+            <div id="summary" class="summary" style="display: none;">
+                <h3>Website Summary</h3>
+                <p id="summaryText"></p>
+            </div>
+        </div>
+
+        <div class="card" id="chatSection" style="display: none;">
+            <h3>Chat about the Website Content</h3>
+            <div id="chatContainer" class="chat-container"></div>
+            
+            <div class="chat-input">
+                <input type="text" id="userInput" class="input" placeholder="Ask a question about the website...">
+                <button id="sendMessage" class="button">Send</button>
+            </div>
+        </div>
+
+        <p id="status" class="status"></p>
+    </div>
+
+    <script src="{{ url_for('static', filename='scriptSite.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+```mermaid
+flowchart TB
+    subgraph Frontend
+        UI[Web Interface]
+        URL[URL Input]
+        Chat[Chat Interface]
+    end
+
+    subgraph Backend
+        Flask[Flask Server]
+        Extract[Content Extractor]
+        Gemini[Gemini AI Model]
+        
+        subgraph Endpoints
+            Analyze[/analyze-website/]
+            ChatMsg[/chat-message/]
+        end
+    end
+
+    subgraph External
+        Website[Target Website]
+        GeminiAPI[Gemini API Service]
+    end
+
+    %% URL Analysis Flow
+    URL --> |1. Submit URL| UI
+    UI --> |2. POST Request| Analyze
+    Analyze --> |3. Request Content| Extract
+    Extract --> |4. Fetch| Website
+    Website --> |5. Return HTML| Extract
+    Extract --> |6. Extracted Text| Analyze
+    Analyze --> |7. Generate Summary| Gemini
+    Gemini --> |8. API Request| GeminiAPI
+    GeminiAPI --> |9. Summary| Gemini
+    Gemini --> |10. Return Summary| UI
+    UI --> |11. Display| Chat
+
+    %% Chat Flow
+    Chat --> |1. Send Message| ChatMsg
+    ChatMsg --> |2. Context + Question| Gemini
+    Gemini --> |3. API Request| GeminiAPI
+    GeminiAPI --> |4. Response| Gemini
+    Gemini --> |5. Return Answer| Chat
+
+    %% Styles
+    classDef frontend fill:#d4e6ff,stroke:#333,stroke-width:2px
+    classDef backend fill:#ffe7d4,stroke:#333,stroke-width:2px
+    classDef external fill:#d4ffd4,stroke:#333,stroke-width:2px
+    classDef endpoint fill:#ffd4d4,stroke:#333,stroke-width:2px
+
+    class UI,URL,Chat frontend
+    class Flask,Extract,Gemini backend
+    class Website,GeminiAPI external
+    class Analyze,ChatMsg endpoint
